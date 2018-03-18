@@ -1,0 +1,59 @@
+<div class="row">
+  <%= image_tag('header.jpg', class:'header_img') %>
+  <% dots ='' %>
+  <!--Define color of marker-->
+  <% dot_color = ['black', 'brown', 'green', 'purple', 'yellow', 'blue', 'gray', 'orange', 'red', 'white'] %>
+  <% @users.each do |u| %>
+      <!--Define user's markers-->
+      <% dots += "markers=color:#{dot_color.sample}%7Clabel:#{u.user_info.first_name.upcase[0]}%7C#{u.user_info.latitude},#{u.user_info.longitude}&" %>
+  <% end %>
+  <div class="col-md-6">
+    <img src="http://maps.googleapis.com/maps/api/staticmap?<%= dots %>size=1024x768&scale=2?key=Your API_KEY" width="100%"/>
+  </div>
+  <div class="col-md-4">
+    <% if current_user %>
+      <h4>Near with you:</h4>
+        <div class="table-responsive">
+          <ul class="list-group">
+            <% @users.each do |u| %>
+                <li class="list-group-item list-group-item-success"><span class="glyphicon glyphicon-user"></span> <%= u.user_info.first_name %> <%= u.user_info.last_name %> || <%= ((Time.zone.now - u.user_info.age.to_time) /1.year.seconds).floor %> years
+                <% if u.user_info.github.present? %>
+                  <%= link_to image_tag('github.png',width:20),
+                      u.user_info.github, target: '_blank'
+                  %>
+                <% end %>
+                <% if u.user_info.facebook.present? %>
+                   <%= link_to image_tag('facebook.png',width:20),
+                      u.user_info.facebook, target: '_blank'
+                   %>
+                <% end %>
+                <% if u.user_info.twitter.present? %>
+                   <%= link_to image_tag('twitter.png',width:20),
+                      u.user_info.twitter, target: '_blank'
+                   %>
+                <% end %>
+                </li>
+                <% if u != current_user %>
+                    <span class="glyphicon glyphicon-sort"><i> in <%='%.2f' % u.user_info.distance_to([current_user.user_info.latitude, current_user.user_info.longitude], :km) %> km from you</i></span>
+                <% end %>
+                <table class="table table-striped text-center">
+                  <% u.profiles.each do |profile| %>
+                      <tr>
+                        <td class="text-left"><span class="glyphicon glyphicon-flash"></span><%= link_to profile.position, profile_path(profile) %></td><td class="text-right"><span class="glyphicon glyphicon-time"></span><%= profile.exp_period %></td></tr>
+                  <% end %>
+                </table>
+            <% end %>
+      <% else %>
+       <h3>Welcome to FaceToFace</h3>
+          On the left side you can see our customers.
+          <p><b>Tell about your profession.
+            You have some cool ideas but you don't know who can help you?
+            Create your profiles here and tell people around about you.</b></p>
+          <h4>What are you waiting for?!</h4>
+      <% end %>
+    </ul>
+        </div>
+
+  </div>
+
+</div>

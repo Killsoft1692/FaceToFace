@@ -1,0 +1,15 @@
+<div class="col-md-10" style="margin-left: 3%">
+  <h3>Manage skills here:</h3>
+  <ul class="list-group" style="width: 25%">
+    <% @skills.each do |s| %>
+      <li class="list-group-item list-group-item-success">
+        <%= s.title %>
+      </li>
+    <% end %>
+  </ul>
+  <%= form_for @skill, url: {action: :create} do |f| %>
+    <p><%= f.text_field :title, placeholder: 'Skill\'s tile', required: true %></p>
+    <%= f.submit %>
+  <% end %>
+
+</div>

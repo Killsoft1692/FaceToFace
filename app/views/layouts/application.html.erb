@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FaceToFace</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <!--AIzaSyD15U_Zj5d8J266KweqMO7JDMEv0c98gYA-->
+  <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">FaceToFace</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li class="active"><a href="/profile">MultiCV</a></li></li>
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "Logout", destroy_user_session_path, :method => 'delete' if current_user%></li>
+          <li><%= link_to "Login", new_user_session_path, :method => 'get' if not current_user %></li>
+        </ul>
+      </div>
+    </nav>
+    <%= yield %>
+    <div class="footer">
+      <b>HelloWorldStudio</b> ||
+      <%= link_to 'Watch More', 'https://github.com/Killsoft1692' %>
+    </div>
+  </body>
+</html>

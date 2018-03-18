@@ -1,0 +1,11 @@
+<div class="col-md-10">
+  <h3>Your profiles:</h3>
+  <ul class="list-group">
+    <% @profiles.each do |p| %>
+        <li class="list-group-item list-group-item-success">
+          <%= link_to p.position, profile_path(p.id) %>
+        </li>
+    <% end %>
+  </ul>
+  <%= button_to 'Add more', new_profile_path, class: 'btn btn-success', style: 'border-radius:50px' , method: :get %>
+</div>

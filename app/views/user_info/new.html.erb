@@ -1,0 +1,11 @@
+<%= form_for @user_info, url: {action: 'create'} do |f| %>
+    <p><%= f.text_field :first_name, placeholder: 'Insert your first name', required: true %></p>
+    <p><%= f.text_field :last_name, placeholder: 'Insert your last name', required: true %></p>
+    <p><%= f.date_select :age, start_year: 1900 , end_year: 2010, required: true%></p>
+    <p><%= f.text_field :facebook, placeholder: 'Facebook'%></p>
+    <p><%= f.text_field :twitter, placeholder: 'Twitter'%></p>
+    <p><%= f.text_field :github, placeholder: 'GitHub'%></p>
+    <p><%= f.text_field :country, placeholder: 'Your country' %></p>
+    <p><%= f.text_field :city, placeholder: 'Your city' %></p>
+    <%= f.submit %>
+<% end %>

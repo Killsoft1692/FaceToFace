@@ -1,0 +1,4 @@
+<h3>Edit your profile:</h3>
+<%= form_for @profile, url: profile_path , html: { method: :patch } do |f| %>
+    <%= render'form', f:f %>
+<% end %>

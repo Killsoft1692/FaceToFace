@@ -1,0 +1,28 @@
+<div class="col-md-10" style="margin-left: 3%">
+  <h3>Position: <%= @profile.position %></h3>
+
+  <h4><i>Experience(years):</i> <%= @profile.exp_period %></h4>
+  <% if @profile.user == current_user %>
+    <div class="row">
+      <div class="col-md-1">
+        <%= button_to 'Edit', edit_profile_path(@profile), class: 'btn btn-warning btn-xs', method: :get, style: 'border-radius:45px' %>
+      </div>
+      <div class="col-md-1">
+        <%= button_to 'Delete', profile_path(@profile), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs', style: 'border-radius:45px' %>
+      </div>
+    </div>
+  <% end %>
+  <div class="user-skills" style="width: 25%">
+    <b>Skills:</b>
+    <ul class="list-group">
+      <% @profile.skills.each do |s| %>
+        <li class="list-group-item list-group-item-success">
+          <%= s.title %>
+        </li>
+      <% end %>
+    </ul>
+    <% if @profile.user == current_user %>
+      <p><%= link_to 'Add more', profile_skills_path(@profile) %></p>
+    <% end %>
+  </div>
+</div>
